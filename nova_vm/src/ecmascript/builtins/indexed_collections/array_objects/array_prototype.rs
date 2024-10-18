@@ -2642,10 +2642,9 @@ impl ArrayPrototype {
             //    c. Let fromValue be ? Get(O, from).
             let from_value = get(agent, o, from)?;
             //    d. Perform ! CreateDataPropertyOrThrow(A, Pk, fromValue).
-            create_data_property_or_throw(agent, a, pk, from_value)?;
+            create_data_property_or_throw(agent, a, pk, from_value).unwrap();
             //    e. Set k to k + 1.
             k += 1;
-            eprintln!("k: {}", k);
         }
         // 6. Return A.
         Ok(a.into_value())
