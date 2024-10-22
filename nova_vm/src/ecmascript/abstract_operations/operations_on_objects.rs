@@ -643,19 +643,19 @@ pub(crate) trait EnumerablePropertiesKind {
 pub(crate) mod enumerable_properties_kind {
     use super::{EnumPropKind, EnumerablePropertiesKind};
 
-    pub(crate) struct Key;
-    pub(crate) struct Value;
-    pub(crate) struct KeyValue;
+    pub(crate) struct EnumerateKeys;
+    pub(crate) struct EnumerateValues;
+    pub(crate) struct EnumerateKeysAndValues;
 
-    impl EnumerablePropertiesKind for Key {
+    impl EnumerablePropertiesKind for EnumerateKeys {
         const KIND: EnumPropKind = EnumPropKind::Key;
     }
 
-    impl EnumerablePropertiesKind for Value {
+    impl EnumerablePropertiesKind for EnumerateValues {
         const KIND: EnumPropKind = EnumPropKind::Value;
     }
 
-    impl EnumerablePropertiesKind for KeyValue {
+    impl EnumerablePropertiesKind for EnumerateKeysAndValues {
         const KIND: EnumPropKind = EnumPropKind::KeyValue;
     }
 }
@@ -907,7 +907,6 @@ pub(crate) fn initialize_instance_elements(
         // To do this, we need a new execution context that points to a new
         // Function environment. The function environment should be lexically a
         // child of the class constructor's creating environment.
-        let bytecode = unsafe { bytecode.as_ref() };
         let f = constructor.into_function();
         let outer_env = constructor_data.environment;
         let outer_priv_env = constructor_data.private_environment;
